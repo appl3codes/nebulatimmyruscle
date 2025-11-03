@@ -179,49 +179,61 @@
 <body>
 
   <nav>
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="games.html">Games</a>
-    <a href="apps.html">Apps</a>
-    <a href="more.html">More</a>
-  </div>
-</nav>
-
-
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="games.html">Games</a>
+      <a href="apps.html">Apps</a>
+      <a href="more.html">More</a>
+    </div>
+  </nav>
 
   <h1>users</h1>
 
   <div class="team-grid">
-    <!-- Example Card -->
-    <div class="card" onclick="openProfile('olivia')">
-      <img src="https://yt3.googleusercontent.com/1in7IvmROE4Hjq7tjcK7BNbq6ZVN1F9dMFoCzIdF50gTWvGIYEI-JAUwlur02byCnsNdO99r=s160-c-k-c0x00ffffff-no-rj" alt="olivia">
+    <!-- Appl3 Card -->
+    <div class="card" onclick="openProfile('appl3')">
+      <img src="https://yt3.googleusercontent.com/1in7IvmROE4Hjq7tjcK7BNbq6ZVN1F9dMFoCzIdF50gTWvGIYEI-JAUwlur02byCnsNdO99r=s160-c-k-c0x00ffffff-no-rj" alt="Appl3">
       <div class="card-info">
         <h2>Appl3</h2>
-        <p>Nonchalant</p>
+        <p>OWNER / CODER OF NEBULA</p>
       </div>
     </div>
 
-    <!-- Add more cards below like this -->
+    <!-- Vance Pervert Card -->
+    <div class="card" onclick="openProfile('vance')">
+      <img src="https://avatarfiles.alphacoders.com/327/327681.jpg" alt="Vance Pervert">
+      <div class="card-info">
+        <h2>Vance Pervert</h2>
+        <p>CO-FOUNDER OF NEBULA</p>
+      </div>
+    </div>
   </div>
 
   <!-- Profile Modal -->
   <div class="profile-modal" id="profileModal">
     <div class="profile-content" id="profileContent">
-      <!-- Dynamic profile content will load here -->
+      <!-- Dynamic profile content -->
     </div>
   </div>
 
   <script>
     const profiles = {
-      olivia: {
+      appl3: {
         name: "Appl3",
         username: "Appl3",
         img: "https://yt3.googleusercontent.com/1in7IvmROE4Hjq7tjcK7BNbq6ZVN1F9dMFoCzIdF50gTWvGIYEI-JAUwlur02byCnsNdO99r=s160-c-k-c0x00ffffff-no-rj",
         joined: "Built Nebula",
-        lastOnline: "OWNER/CODER OF NEBULA",
+        lastOnline: "OWNER / CODER OF NEBULA",
         about: "CRAZY"
+      },
+      vance: {
+        name: "Vance Pervert",
+        username: "Vance",
+        img: "https://avatarfiles.alphacoders.com/327/327681.jpg",
+        joined: "Co-Founder of Nebula",
+        lastOnline: "CO-FOUNDER OF NEBULA",
+        about: "Likes Pickles"
       }
-      // You can add more user data here (key: username)
     };
 
     function openProfile(userKey) {
@@ -229,13 +241,13 @@
       const modal = document.getElementById("profileModal");
       const content = document.getElementById("profileContent");
       content.innerHTML = `
-        <h2>${user.name}'s profile</h2>
+        <h2>${user.name}'s Profile</h2>
         <img src="${user.img}" alt="${user.name}">
         <h2>${user.name}</h2>
         <p>${user.username}</p>
         <p>${user.joined}</p>
         <p>${user.lastOnline}</p>
-        <h3>about me</h3>
+        <h3>About Me</h3>
         <p>${user.about}</p>
         <br>
         <button class="close-btn" onclick="closeProfile()">Close</button>
