@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nebula</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at center, #4B0082, #2b004d);
+      color: white;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      opacity: 0;
+      animation: fadeIn 1.5s ease-in forwards;
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 15px 0;
+      z-index: 10;
+      opacity: 0;
+      animation: fadeDown 1.5s ease-in-out forwards;
+      animation-delay: 0.3s;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 1.1em;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #c99cff;
+    }
+
+    /* Title and subtitle */
+    .content {
+      text-align: center;
+      opacity: 0;
+      animation: fadeUp 1.5s ease forwards;
+      animation-delay: 0.5s;
+    }
+
+    .title {
+      font-size: 4em;
+      font-weight: 700;
+      text-shadow: 0 0 20px #c99cff;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 1.2em;
+      margin-bottom: 40px;
+    }
+
+    /* Icon links */
+    .icons {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+    }
+
+    .icons a {
+      text-decoration: none;
+      color: white;
+      font-size: 3em;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    .icons a:hover {
+      transform: scale(1.2);
+      color: #c99cff;
+    }
+
+    /* Floating stars animation */
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: float 10s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+
+    /* Fade animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeUp {
+      0% { transform: translateY(20px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeDown {
+      0% { transform: translateY(-20px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="games.html">Games</a>
+    <a href="apps.html">Apps</a>
+    <a href="more.html">More</a>
+  </div>
+</nav>
+
+
+  <div class="content">
+    <div class="title">Nebula.</div>
+    <div class="subtitle">best unblocked website</div>
+
+    <div class="icons">
+      <a href="ourteam.html" title="Our Team">👤</a>
+      <a href="games.html" title="Games">🎮</a>
+      <a href="discord.html" title="Discord">💬</a>
+    </div>
+  </div>
+
+  <script>
+    // Generate floating stars
+    const numStars = 50;
+    for (let i = 0; i < numStars; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      const size = Math.random() * 3 + 'px';
+      star.style.width = size;
+      star.style.height = size;
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.animationDuration = (Math.random() * 10 + 5) + 's';
+      document.body.appendChild(star);
+    }
+  </script>
+
+</body>
+</html>

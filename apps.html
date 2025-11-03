@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apps | Nebula</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at center, #4B0082, #2b004d);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeInPage 1.2s ease forwards;
+      position: relative;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 15px 0;
+      z-index: 10;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 1.1em;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #c99cff;
+    }
+
+    h1 {
+      font-size: 4em;
+      text-shadow: 0 0 25px #c99cff;
+      animation: glowPulse 2s ease-in-out infinite;
+    }
+
+    /* Floating stars */
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: float 10s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+
+    /* Animations */
+    @keyframes fadeInPage {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes glowPulse {
+      0% { text-shadow: 0 0 15px #c99cff; }
+      50% { text-shadow: 0 0 35px #c99cff; }
+      100% { text-shadow: 0 0 15px #c99cff; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="games.html">Games</a>
+    <a href="apps.html">Apps</a>
+    <a href="more.html">More</a>
+  </div>
+</nav>
+
+
+  <h1>SOON....</h1>
+
+  <script>
+    // Floating stars
+    const numStars = 50;
+    for (let i = 0; i < numStars; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      const size = Math.random() * 3 + 'px';
+      star.style.width = size;
+      star.style.height = size;
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.animationDuration = (Math.random() * 10 + 5) + 's';
+      document.body.appendChild(star);
+    }
+  </script>
+
+</body>
+</html>
