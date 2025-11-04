@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Games | Nebula</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
+    /* General Page Style */
     * {
       margin: 0;
       padding: 0;
@@ -19,14 +21,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: flex-start;
       overflow-x: hidden;
+      animation: fadeIn 1.5s ease forwards;
       opacity: 0;
-      animation: fadeIn 1.2s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
     }
 
     nav {
@@ -34,38 +32,140 @@
       top: 0;
       width: 100%;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 15px 40px;
+      align-items: center;
       background: rgba(0, 0, 0, 0.2);
       backdrop-filter: blur(10px);
+      padding: 15px 40px;
       z-index: 10;
     }
 
-    .logo {
+    nav .nav-left {
       font-weight: 700;
       font-size: 1.5em;
       color: #c99cff;
-      text-shadow: 0 0 10px #c99cff;
+      letter-spacing: 1px;
     }
 
-    .nav-links a {
+    nav .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    nav a {
       color: white;
       text-decoration: none;
-      margin: 0 15px;
       font-size: 1.1em;
       transition: color 0.3s;
     }
 
-    .nav-links a:hover {
+    nav a:hover,
+    nav a.active {
       color: #c99cff;
     }
 
+    /* Header */
     h1 {
-      margin-top: 100px;
+      margin-top: 120px;
       font-size: 2.5em;
       text-shadow: 0 0 15px #c99cff;
       animation: fadeUp 1.5s ease;
+    }
+
+    /* Game Cards */
+    .games-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 60px;
+    }
+
+    .game-card {
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      width: 250px;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 20px rgba(201, 156, 255, 0.2);
+    }
+
+    .game-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(201, 156, 255, 0.4);
+    }
+
+    /* Game Modal */
+    .game-modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(15px);
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    .game-content {
+      background: rgba(40, 0, 70, 0.9);
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(201,156,255,0.3);
+      width: 80%;
+      max-width: 1000px;
+      height: 80%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      animation: popup 0.3s ease forwards;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      flex: 1;
+    }
+
+    .close-btn,
+    .fullscreen-btn {
+      position: absolute;
+      top: 15px;
+      padding: 10px 18px;
+      border: none;
+      background: #c99cff;
+      color: #2b004d;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .close-btn:hover,
+    .fullscreen-btn:hover {
+      background: white;
+    }
+
+    .close-btn { right: 15px; }
+    .fullscreen-btn { left: 15px; }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     @keyframes fadeUp {
@@ -73,154 +173,63 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .games-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      width: 90%;
-      max-width: 1000px;
-      margin: 40px auto;
+    @keyframes popup {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
-
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4em;
-      cursor: pointer;
-      transition: 0.3s;
-      text-shadow: 0 0 10px rgba(201,156,255,0.5);
-      box-shadow: 0 0 10px rgba(201, 156, 255, 0.1);
-    }
-
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(201, 156, 255, 0.3);
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    /* Game Modal */
-    .game-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(10px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 20;
-      animation: fadeIn 0.4s ease forwards;
-    }
-
-    .game-content {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 20px;
-      width: 90%;
-      max-width: 1000px;
-      text-align: center;
-      box-shadow: 0 0 25px rgba(201, 156, 255, 0.3);
-      animation: fadeUp 0.5s ease forwards;
-    }
-
-    iframe {
-      width: 100%;
-      height: 600px;
-      border-radius: 15px;
-      border: none;
-      margin-bottom: 15px;
-    }
-
-    .close-btn, .fullscreen-btn {
-      background: none;
-      border: 2px solid #c99cff;
-      color: #c99cff;
-      border-radius: 10px;
-      padding: 10px 25px;
-      cursor: pointer;
-      font-size: 1em;
-      transition: 0.3s;
-      margin: 0 10px;
-    }
-
-    .close-btn:hover, .fullscreen-btn:hover {
-      background: #c99cff;
-      color: #2b004d;
-      box-shadow: 0 0 15px #c99cff;
-    }
-
   </style>
 </head>
 <body>
 
+  <!-- Nebula Navbar -->
   <nav>
-    <div class="logo">NEBULA</div>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="games.html">Games</a>
-      <a href="apps.html">Apps</a>
-      <a href="more.html">More</a>
-    </div>
+    <div class="nav-left">NEBULA</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="games.html" class="active">Games</a></li>
+      <li><a href="ourteam.html">Our Team</a></li>
+      <li><a href="apps.html">Apps</a></li>
+    </ul>
   </nav>
 
+  <!-- Games Grid -->
   <h1>Games</h1>
-
-  <div class="games-grid">
-    <div class="card" onclick="openGame('slope')">Slope</div>
-    <div class="card" onclick="openGame('run3')">Run 3</div>
+  <div class="games-container">
+    <div class="game-card" onclick="openGame('https://slope-game.github.io/rungame/slope3/')">Slope</div>
+    <div class="game-card" onclick="openGame('https://ubg98.github.io/Run3/')">Run 3</div>
   </div>
 
   <!-- Game Modal -->
-  <div class="game-modal" id="gameModal">
-    <div class="game-content" id="gameContent">
-      <!-- Game iframe loads here dynamically -->
+  <div id="gameModal" class="game-modal">
+    <div class="game-content">
+      <button class="fullscreen-btn" onclick="openFullscreen()">Full Screen</button>
+      <button class="close-btn" onclick="closeGame()">Close</button>
+      <iframe id="gameFrame"></iframe>
     </div>
   </div>
 
   <script>
-    const games = {
-      slope: {
-        name: "Slope",
-        url: "https://slope-game.github.io/rungame/slope3/"
-      },
-      run3: {
-        name: "Run 3",
-        url: "https://interstellar-v3-68n.pages.dev/play/run3"
-      }
-    };
+    const modal = document.getElementById('gameModal');
+    const frame = document.getElementById('gameFrame');
 
-    function openGame(gameKey) {
-      const game = games[gameKey];
-      const modal = document.getElementById("gameModal");
-      const content = document.getElementById("gameContent");
-      content.innerHTML = `
-        <iframe id="gameframe" src="${game.url}" allowfullscreen></iframe>
-        <div>
-          <button class="fullscreen-btn" onclick="openFullscreen()">Fullscreen</button>
-          <button class="close-btn" onclick="closeGame()">Close</button>
-        </div>
-      `;
-      modal.style.display = "flex";
+    function openGame(url) {
+      modal.style.display = 'flex';
+      frame.src = url;
+      document.body.style.overflow = 'hidden';
     }
 
     function closeGame() {
-      document.getElementById("gameModal").style.display = "none";
+      modal.style.display = 'none';
+      frame.src = '';
+      document.body.style.overflow = 'auto';
     }
 
     function openFullscreen() {
-      const iframe = document.getElementById("gameframe");
-      if (iframe.requestFullscreen) {
-        iframe.requestFullscreen();
-      } else if (iframe.mozRequestFullScreen) {
-        iframe.mozRequestFullScreen();
-      } else if (iframe.webkitRequestFullscreen) {
-        iframe.webkitRequestFullscreen();
-      } else if (iframe.msRequestFullscreen) {
-        iframe.msRequestFullscreen();
-      }
+      const elem = frame;
+      if (elem.requestFullscreen) elem.requestFullscreen();
+      else if (elem.mozRequestFullScreen) elem.mozRequestFullScreen();
+      else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+      else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
     }
   </script>
 
